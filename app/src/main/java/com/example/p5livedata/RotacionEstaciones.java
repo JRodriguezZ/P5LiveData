@@ -48,7 +48,7 @@ public class RotacionEstaciones {
                 @Override
                 public void run() {
                     if(mes == 0){
-                        rotacionEstacionListener.cuandoCambieElMes("ESTACION " + estacion);
+                        rotacionEstacionListener.cuandoCambieElMes("ESTACION" + estacion);
                     } else {
                         rotacionEstacionListener.cuandoCambieElMes("MES" + mes);
                     }
