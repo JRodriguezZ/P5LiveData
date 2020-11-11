@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/opticaFragment">
-
+    app:startDestination="@id/estacionesFragment">
     <fragment
-        android:id="@+id/opticaFragment"
-        android:name="com.example.p5livedata.OpticaFragment"
-        android:label="fragment_optica"
-        tools:layout="@layout/fragment_optica" />
+        android:id="@+id/estacionesFragment"
+        android:name="com.example.p5livedata.EstacionesFragment"
+        android:label="fragment_estaciones"
+        tools:layout="@layout/fragment_estaciones" />
 </navigation>

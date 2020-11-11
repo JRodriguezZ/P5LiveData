@@ -3,27 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpticaFragment">
+    tools:context=".EstacionesFragment">
 
     <ImageView
-        android:id="@+id/ejercicio"
+        android:id="@+id/estacion"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/meses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="48sp"/>
     <TextView
         android:id="@+id/cambio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="#ddee44"
         android:textColor="@color/white"
         android:visibility="gone"
-        android:text="CAMBIO DE FASE"
+        android:text="CAMBIO"
         android:gravity="center"
         android:textSize="48sp"/>
-
-    <TextView
-        android:id="@+id/fase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="48sp" />
 </FrameLayout>
