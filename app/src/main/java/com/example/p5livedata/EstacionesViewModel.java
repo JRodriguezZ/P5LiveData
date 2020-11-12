@@ -1,6 +1,7 @@
 package com.example.p5livedata;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.util.Function;
@@ -10,7 +11,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
 public class EstacionesViewModel extends AndroidViewModel {
-
     RotacionEstaciones rotacionEstaciones;
 
     LiveData<Integer> idImagenLiveData;
@@ -20,20 +20,31 @@ public class EstacionesViewModel extends AndroidViewModel {
 
         rotacionEstaciones = new RotacionEstaciones();
 
-        idImagenLiveData = Transformations.switchMap(rotacionEstaciones.rotacionLiveData, new Function<String, LiveData<Integer>>() {
-            @Override
-            public LiveData<Integer> apply(String input) {
-                int imagen;
-                if(input.equals("ESTACION1")) {
-                    imagen = R.drawable.winter;
-                } else if(input.equals("ESTACION2")){
-                    imagen = R.drawable.summer;
-                } else {
-                    return null;
-                }
+        idImagenLiveData = Transformations.switchMap(rotacionEstaciones.rotacionLiveData, input -> {
 
-                return new MutableLiveData<>(imagen);
+            Log.e("ABCD", "RECIBIDO " + input + "... conviernd en imagen");
+            int imagen;
+            switch (input) {
+                case "ESTACION1":
+                    imagen = R.drawable.winter;
+                    break;
+                case "ESTACION2":
+                    imagen = R.drawable.spring;
+                    break;
+                case "ESTACION3":
+                    imagen = R.drawable.summer;
+                    break;
+                case "ESTACION4":
+                    imagen = R.drawable.autumn;
+                    break;
+                default:
+                    return null;
             }
+            Log.e("ABCD", "La imagen es " + imagen);
+            return new MutableLiveData<>(imagen);
         });
+    }
+    LiveData<Integer> obtenerEstacion(){
+        return idImagenLiveData;
     }
 }

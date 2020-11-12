@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.example.p5livedata.databinding.FragmentEstacionesBinding;
 
 public class EstacionesFragment extends Fragment {
@@ -26,11 +27,8 @@ public class EstacionesFragment extends Fragment {
 
         EstacionesViewModel estacionesViewModel = new ViewModelProvider(this).get(EstacionesViewModel.class);
 
-        estacionesViewModel.idImagenLiveData.observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer i) {
-                binding.estacion.setImageResource(i);
-            }
+        estacionesViewModel.obtenerEstacion().observe(getViewLifecycleOwner(), i -> {
+            Glide.with(EstacionesFragment.this).load(i).into(binding.estacion);
         });
     }
 }

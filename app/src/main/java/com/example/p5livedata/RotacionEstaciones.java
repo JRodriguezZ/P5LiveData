@@ -1,5 +1,7 @@
 package com.example.p5livedata;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import java.util.concurrent.Executors;
@@ -23,11 +25,10 @@ public class RotacionEstaciones {
         protected void onActive() {
             super.onActive();
 
-            iniciarRotacion(new RotacionEstacionListener() {
-                @Override
-                public void cuandoCambieElMes(String rotacion) {
-                    setValue(rotacion);
-                }
+            iniciarRotacion(rotacion -> {
+
+                Log.e("ABCD", "ME ha llegado el " + rotacion);
+                postValue(rotacion);
             });
         }
 
@@ -35,7 +36,7 @@ public class RotacionEstaciones {
         protected void onInactive() {
             super.onInactive();
 
-            pararEntrenamiento();
+            pararRotacion();
         }
     };
 
@@ -47,12 +48,17 @@ public class RotacionEstaciones {
                 int mes = 0;
                 @Override
                 public void run() {
+                    Log.e("ABCD", "Run() oh yead");
+
                     if(mes == 0){
+                        Log.e("ABCD", "Notificando cambio de estacion: " + estacion);
                         rotacionEstacionListener.cuandoCambieElMes("ESTACION" + estacion);
                     } else {
+                        Log.e("ABCD", "Notificando cambio de mes: " + mes);
                         rotacionEstacionListener.cuandoCambieElMes("MES" + mes);
                     }
                     mes++;
+
                     if(mes > 3){
                         estacion++;
                         mes=0;
@@ -66,37 +72,10 @@ public class RotacionEstaciones {
         }
     }
 
-    void pararEntrenamiento() {
+    void pararRotacion() {
+        Log.e("ABCD", "cancelando rotacion");
         if (rotando != null) {
             rotando.cancel(true);
         }
     }
 }
-
-
-/*
-ESTACION1    MES0
-MES1
-MES2
-MES3
-ESTACION2   MES0
-MES1
-MES2
-MES3
-ESTACION3     MES0
-MES1
-MES2
-MES3
-ESTACION4     MES0
-MES1
-MES2
-MES3
-
- */
-
-/*
-for () {
-       sout("");
-}
-
- */
